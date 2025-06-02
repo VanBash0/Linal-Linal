@@ -1,0 +1,321 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\usepackage{multicol}
+\usepackage{amssymb}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.5em}{}
+\setlist[itemize]{noitemsep, topsep=0pt}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Линейная алгебра. Модуль: Евклидовы пространства. Тензоры}}\\
+    \vspace{0.3em}
+    Башков Иван\\
+    \vspace{0.3em}
+    2 июня 2025 г.
+\end{center}
+
+\section{Билинейные функции и их матрицы. Преобразование матрицы билинейной функции при замене базиса. Ранг и ядра билинейной функции. Связь между билинейной функцией и линейным отображением в сопряжённое пространство.}
+
+\subsection{Билинейные функции и их матрицы}
+
+\textbf{Определение.} \textit{Билинейной функцией (формой)} на векторном пространстве $V$ называется отображение 
+\[
+\beta: V \times V \to \mathbb{F},
+\]
+которое линейно по каждому аргументу.
+
+Это означает, что:
+\begin{itemize}
+    \item $\beta(x_1 + x_2, y) = \beta(x_1, y) + \beta(x_2, y)$,
+    \item $\beta(\lambda x, y) = \lambda \beta(x, y)$,
+    \item $\beta(x, y_1 + y_2) = \beta(x, y_1) + \beta(x, y_2)$,
+    \item $\beta(x, \lambda y) = \lambda \beta(x, y)$,
+\end{itemize}
+для всех $x, x_1, x_2, y, y_1, y_2 \in V$, $\lambda \in \mathbb{F}$.
+
+\vspace{0.5em}
+\textbf{Матрица билинейной формы.} Пусть $e_1, \dots, e_n$ — базис в $V$, тогда билинейная форма $\beta$ задаётся значениями $\beta(e_i, e_j)$, которые образуют матрицу $B = (\beta(e_i, e_j))$.
+
+Если $x = \sum x_i e_i$, $y = \sum y_j e_j$, то:
+\[
+\beta(x, y) = X^\top B Y, \quad \text{где } X = (x_1, \dots, x_n)^\top,\ Y = (y_1, \dots, y_n).
+\]
+
+\subsection{Преобразование матрицы билинейной формы при замене базиса}
+
+Пусть $C$ — матрица перехода от базиса $e$ к новому базису $\tilde{e}$. Тогда матрица билинейной формы в новом базисе $\tilde{B}$ связана с исходной по формуле:
+\[
+\tilde{B} = C^\top B C.
+\]
+
+\textbf{Доказательство:}
+Пусть $C=(e \rightsquigarrow \tilde{e})$, где $e$ – старый базис, $\tilde{e}$ – новый базис. Тогда\\
+$X = (e \rightsquigarrow \tilde{e}) \tilde{X} = C\tilde{X}$, $Y = (e \rightsquigarrow \tilde{e}) \tilde{Y} = C\tilde{Y}$\\
+$\beta(x,y)=(C \tilde{X})^\top B(C\tilde{Y})=\tilde{X}^\top(C^\top BC)\tilde{Y}=\tilde{X}^\top B\tilde{Y} \implies \tilde{B} = C^\top BC, \ C \in GL_n(F) \ \square$
+
+\textbf{Следствие.} Ранг билинейной формы не зависит от выбора базиса, так как $C$ невырожденная.
+
+\subsection{Ранг и ядра билинейной функции}
+
+\textbf{Определение.} \textit{Рангом билинейной формы} $\beta$ называется ранг её матрицы:
+\[
+\mathrm{rk}\, \beta = \mathrm{rk}\, B.
+\]
+
+\textbf{Правое ядро:}
+\[
+R_\beta =\mathrm{Ker} \beta = \{ y \in V \mid \beta(x, y) = 0 \ \ \forall x \in V \}.
+\]
+
+\textbf{Левое ядро:}
+\[
+L_ \beta = \{ x \in V \mid \beta(x, y) = 0 \ \ \forall y \in V \}.
+\]
+
+\textbf{Определение.} Форма называется \textit{невырожденной}, если $\mathrm{Ker} \beta = \{0\}$.
+
+\textbf{Лемма.} $\beta{} \text{ невырождена } \Longleftrightarrow rk\beta=n.$
+
+\subsection{Связь с линейным отображением в сопряжённое пространство}
+
+\textbf{Теорема.} Билинейные формы на $V$ канонически изоморфны линейным отображениям из $V$ в его сопряжённое пространство $V^*$.
+
+\textbf{Доказательство:}
+
+1. Для каждой билинейной формы $\beta \in BL(V)$ определим отображение $\varphi(\beta): V \to V^*$ следующим образом:
+     $$
+     \varphi(\beta)(v) = \beta(v, -),
+     $$
+     где $\beta(v, -)$ — линейный функционал на $V$, определенный как:
+     $$
+     \beta(v, -)(w) = \beta(v, w), \quad \forall w \in V.
+     $$
+
+2. Линейность $\varphi$. Для любых $\beta_1, \beta_2 \in BL(V)$ и $\alpha \in F$:
+       $$
+       \varphi(\beta_1 + \alpha \beta_2)(v) = (\beta_1 + \alpha \beta_2)(v, -) = \beta_1(v, -) + \alpha \beta_2(v, -).
+       $$
+       Это означает:
+       $$
+       \varphi(\beta_1 + \alpha \beta_2) = \varphi(\beta_1) + \alpha \varphi(\beta_2).
+       $$
+       Таким образом, $\varphi$ — линейное отображение.
+
+3. Ядро $\varphi$ состоит из всех билинейных форм $\beta$, для которых $\varphi(\beta) = 0$, то есть:
+     $$
+     \mathrm{Ker} \varphi = \{\beta \in BL(V) \mid \varphi(\beta) = 0\}.
+     $$
+     Если $\varphi(\beta) = 0$, то для любого $v \in V$:
+     $$
+     \beta(v, -) = 0,
+     $$
+     что означает, что $\beta(v, w) = 0$ для всех $v, w \in V$. Следовательно, $\beta = 0$. Таким образом:
+     $$
+     \mathrm{Ker} \varphi = \{0\}.
+     $$
+
+4. Образ $\varphi$ состоит из всех линейных отображений $V \to V^*$, которые можно получить из билинейных форм. Для любого отображения существует $\beta$, что $\varphi(\beta)$ – это именно такое линейное отображение. Таким образом:
+     $$
+     \mathrm{Im} \varphi \leq \mathrm{Hom}(V, V^*), \ \dim \mathrm{Im}\varphi=\dim \mathrm{Hom}(V,V^*)=\dim BL(V) \implies \mathrm{Im}\varphi = \mathrm{Hom}(V,V^*)
+     $$
+
+5. Поскольку $\mathrm{Ker} \varphi = \{0\}$ и $\mathrm{Im} \, \varphi = \mathrm{Hom}(V, V^*)$, отображение $\varphi$ является \textbf{изоморфизмом} между $BL(V)$ и $\mathrm{Hom}(V, V^*)$. $\ \ \square$
+
+
+
+\section{Симметрические и кососимметрические билинейные функции, их матрицы. Ортогональное дополнение к подпространству относительно билинейной функции, его свойства.}
+
+\subsection{Симметрические и кососимметрические билинейные функции, их матрицы}
+
+\textbf{Определение.} Билинейная форма $\beta$ называется:
+\begin{itemize}
+    \item \textit{симметрической} $(BL^+(V))$, если $\beta(x, y) = \beta(y, x) \ \forall x, y \in V$;
+    \item \textit{кососимметрической} $(BL^-(V))$, если $\beta(x, y) = -\beta(y, x) \ \forall x, y \in V$;
+    \item \textit{антисимметрической (симплектической)}, если $\beta(x,x)=0 \ \forall x \in V$.
+\end{itemize}
+
+\textbf{Лемма.} Если $\beta$ антисимметрическая, то $\beta \in BL^-(V)$.
+
+\textbf{Доказательство.}
+$0 = \beta(x + y, x + y)
+  = \beta(x, x) + \beta(x, y) + \beta(y, x) + \beta(y, y) = \beta(x, y) + \beta(y, x)
+  \implies \beta(x, y) = -\beta(y, x).$ \\
+В доказательстве использовалось $\beta(x,x)=0$. Это верно при $char \mathbb{F} \ne 2$: $\beta(x,x)=-\beta(x,x) \implies 2\beta(x,x)=0$.
+
+
+\textbf{Лемма.} $BL(V) = BL^+(V) \oplus BL^-(V)$.
+
+\textbf{Доказательство:}
+
+\textbf{I.} $BL^+(V) \cap BL^-(V) = \{0\}$
+
+Пусть $\beta \in BL^+(V) \cap BL^-(V)$. Тогда:
+\[
+\beta(x, y) = \beta(y, x) = -\beta(x, y) \implies 2\beta(x, y) = 0 \implies \beta = 0.
+\]
+
+\textbf{II.} Для любой билинейной формы $\beta(x, y)$ можно записать:
+\[
+\beta(x, y) = \frac{\beta(x, y) + \beta(y, x)}{2} + \frac{\beta(x, y) - \beta(y, x)}{2}.
+\]
+Здесь:
+\[
+\frac{\beta(x, y) + \beta(y, x)}{2} \in BL^+(V), \quad \frac{\beta(x, y) - \beta(y, x)}{2} \in BL^-(V). \ \ \square
+\]
+
+\textbf{Матрица билинейной формы.}
+Пусть $B = (\beta(e_i, e_j))$ — матрица формы в базисе $e_1, \dots, e_n$.
+\begin{itemize}
+    \item $\beta$ симметрическая $\iff B = B^\top$;
+    \item $\beta$ кососимметрическая $\iff B = -B^\top$.
+\end{itemize}
+
+\textbf{Следствие.} Ранг кососимметрической формы — чётное число.
+
+\subsection{Ортогональное дополнение относительно билинейной формы}
+
+Пусть $\beta$ – симметрическая/кососимметрическая билинейная форма. Векторы $x$ и $y$ \textbf{ортогональны} относительно $\beta$, если $\beta(x,y)=0$.
+
+\textbf{Определение.} Пусть $U \leq V$. Ортогональным дополнением $U^\perp$ относительно формы $\beta$ называется:
+\[
+U^\perp = \{ y \in V \mid \beta(x, y) = 0 \ \forall x \in U \}.
+\]
+
+\textbf{Лемма.} Если $\beta$ невырожденная, то:
+\begin{itemize}
+    \textbf{I.} $\dim U^\perp = \dim V - \dim U$;\\
+    \textbf{II.} $(U^\perp)^\perp = U$.
+\end{itemize}
+
+\textbf{Доказательство:}
+
+\textbf{I.} Пусть $ e_1, \dots, e_k, e_{k+1}, \dots, e_n $ — базис пространства $ V $ и $ e_1, \dots, e_k $ — базис подпространства $ U $.
+
+Рассмотрим ортогональное дополнение $ U^\perp $:
+\[
+U^\perp = \{ y \in V \mid \beta(e_i, y) = 0 \quad \forall i = 1, \dots, k \}.
+\]
+
+Пусть $ y = e_1 y_1 + \dots + e_n y_n $. Тогда система уравнений для $ y \in U^\perp $ имеет вид:
+\[
+\begin{cases}
+b_{11} y_1 + \dots + b_{1n} y_n = 0 \\
+b_{21} y_1 + \dots + b_{2n} y_n = 0 \\
+\vdots \\
+b_{k1} y_1 + \dots + b_{kn} y_n = 0
+\end{cases}
+\]
+
+Это система линейных алгебраических уравнений (СЛАУ). Ранг матрицы системы равен рангу матрицы коэффициентов:
+\[
+\mathrm{rk} \begin{pmatrix}
+b_{11} & \dots & b_{1n} \\
+b_{21} & \dots & b_{2n} \\
+\vdots & \ddots & \vdots \\
+b_{k1} & \dots & b_{kn}
+\end{pmatrix}.
+\]
+
+Ранг матрицы коэффициентов, в свою очередь, равен $\dim U$, так как $\beta$ невырождена $\implies$ любая подсистема строк в $B$ линейно независима.
+
+Таким образом, размерность $ U^\perp $ вычисляется как:
+\[
+\dim U^\perp = n - \mathrm{rk} \begin{pmatrix}
+b_{11} & \dots & b_{1n} \\
+b_{21} & \dots & b_{2n} \\
+\vdots & \ddots & \vdots \\
+b_{k1} & \dots & b_{kn}
+\end{pmatrix} = n - k = \dim V - \dim U.
+\]
+
+\textbf{II.} 1. Проверим включение $ U \subseteq (U^\perp)^\perp $:
+   - Возьмём произвольный вектор $ u \in U $. По определению $ U^\perp $, для любого $ y \in U^\perp $ выполнено $ \beta(u, y) = 0 $.
+   Следовательно, $ u \in (U^\perp)^\perp $, так как $ u $ ортогонален всем векторам из $ U^\perp $.
+
+2. Вычислим размерность $ (U^\perp)^\perp $:
+   по первой части, $ \dim U^\perp = n - k $.
+   Аналогично, $ \dim (U^\perp)^\perp = \dim V - \dim U^\perp = n - (n - k) = k $.
+   Так как $ \dim U = k $, получаем $ \dim (U^\perp)^\perp = \dim U $.
+
+3. Поскольку $ U \subseteq (U^\perp)^\perp $ и размерности совпадают, имеем $ U = (U^\perp)^\perp. \ \ \square$
+
+
+\textbf{Определение.} Подпространство $U$ называется \textit{невырожденным}, если ограничение формы $\beta|_U$ — невырожденное.
+
+\textbf{Лемма.} $U$ невырожденное $\iff V = U \oplus U^\perp$.
+
+\textbf{Доказательство.}
+
+$\dim U = k, \ \dim U^\perp \geq n-k$
+
+$\Longrightarrow$
+
+$\dim (U+U^\perp)=\dim U + \dim U^\perp - \dim (U \cap U^\perp)$
+
+$U \cap U^\perp = \set {0}, \dim(U+U^\perp)=\dim U+\dim U^\perp \geq k + (n-k) \geq n = \dim V$
+
+$U+U^\perp \leq V \implies V = U \oplus U^\perp$
+
+\Longleftarrow
+
+$V = U \oplus U^\perp \implies V = U + U^\perp$
+
+$n = \dim (U+U^\perp) = \dim U + \dim U^\perp \implies \dim(U \cap U^\perp)=0 \implies U \cap U^\perp = \set{0} \ \ \square$
+
+\textbf{Определение.} Базис $e_1, \dots, e_n$ называется \textit{ортогональным}, если $\beta(e_i, e_j) = 0$ при $i \ne j$.
+
+\textbf{Теорема.} Для любой симметрической билинейной формы на конечномерном пространстве существует ортогональный базис.
+
+\textbf{Доказательство.} Индукция по $n = \dim V$:
+\begin{itemize}
+    \item База: $n = 1$ — очев.
+    \item Шаг: $n = k$. Пусть $e_k \in V$ так, что $\beta(e_k, e_k) \ne 0$. Тогда $\beta$ невырождена на $U = \langle e_k \rangle$, и по невырожденности $\beta|_U$ имеем разложение $V = U \oplus U^\perp$, при этом $\dim U^\perp=k-1$. По предположению индукции в $U^\perp$ существует ортогональный базис. Добавим к нему $e_k$ и получим базис $V$.$\ \ \square$
+\end{itemize}
+
+\section{Квадратичные функции, поляризация. Канонический и нормальный виды симметрической билинейной и квадратичной функций.}
+
+\subsection{Квадратичные функции, поляризация}
+
+\textbf{Определение.} Пусть $\beta \in BL^+(V).$ \textit{Квадратичная форма} – $q(x)=\beta(x,x)$:
+
+$$
+q(x) =\sum_{1 \leq i \leq j \leq n}{x_i b_{ij}x_j}
+$$
+
+\textbf{Поляризация квадратичной формы} — восстановление билинейной формы:
+
+$$
+q(x + y) = \beta(x + y, x + y)
+         = \beta(x, x) + 2\beta(x, y) + \beta(y, y)
+$$
+
+$$
+\beta(x, y) = \frac{q(x + y) - q(x) - q(y)}{2}
+$$
+
+\subsection{Канонический и нормальный виды}
+
+Для любой симметрической билинейной формы существует базис, в котором она имеет вид:
+$$
+\beta(x, y) = \sum_{i=1}^n a_i x_i y_i.
+$$
+
+Соответствующая квадратичная форма:
+$$
+q(x) = \sum_{i=1}^n a_i x_i^2.
+$$
+
+Нормальный вид — канонический вид, в котором все ненулевые коэффициенты равны $\pm 1$.
+
+\end{document}
