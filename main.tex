@@ -1999,7 +1999,7 @@ e_{i1}^* \otimes ... e_{iq}^* \otimes e_{j1} \otimes ...\otimes e_{jp} \textbf{ 
 T \in \mathbb{T}^q_p(V);
 \]
 \[
-T =\sum_{i1, ... iq, j1, ... jp=1}^n (\underbrace{T^{i1, ... iq}_{j1, ... jp}}_\text{скаляр-коэфициент}*(e^{i1}\otimes ...\otimes e^{iq} \otimes e_{j1} \otimes...\otimes e_{j1}));
+T =\sum_{i1, ... iq, j1, ... jp=1}^n (\underbrace{T^{i1, ... iq}_{j1, ... jp}}_\text{скаляр-коэфициент}*(e^{i1}\otimes ...\otimes e^{iq} \otimes e_{j1} \otimes...\otimes e_{jp}));
 \]
 уточнение: \(e^{i1}=e^*_{i1}\) и т.д.\\
 каждая из (p+q) переменных независимо пробегает от 1 до n \Rightarrow \(\mathrm{dim}(\mathbb{T}^q_p(V))=n^{p+q}\)\\
@@ -2011,7 +2011,230 @@ T =\sum_{i1, ... iq, j1, ... jp=1}^n (\underbrace{T^{i1, ... iq}_{j1, ... jp}}_\
 \]
 
 
-\section{Компоненты/координаты тензора, их преобразование при замене базиса. Матричная запись тензоров. Эквивалентное определение тензора как «наборов чисел». Тензорное произведение операторов оператор на тензорном квадрате.}
+\section*{18. Компоненты/координаты тензора, их преобразование при замене базиса. Матричная запись тензоров. Эквивалентное определение тензора как «наборов чисел». Тензорное произведение операторов — оператор на тензорном квадрате.}
+
+\textbf{Напомним:}
+Любой тензор \( T \in \mathbb{T}^q_p(V)\) представим в виде,\\
+\[
+T =\sum_{i1, ... iq, j1, ... jp=1}^n (T^{i1, ... iq}_{j1, ... jp}*(e^{i1}\otimes ...\otimes e^{iq} \otimes e_{j1} \otimes...\otimes e_{j1}));
+\]
+здесь, \( T^{i1, ... iq}_{j1, ... jp}\) - компонента/координата тензора.\\
+\( T^{i1, ... iq}_{j1, ... jp} \in F\), где F- поле над которым построенно пространство V\\
+Место компоненты тензора в матричном представлении тензора можно найти следуюшим образом:\\
+В \( T^{i1,i2,i3}_{j1,j2,j3,j4}\)\\
+
+i1- номер строки внутри подматрицы своего слоя\\
+i2- номер столбца внутри подматрицы своего слоя\\
+i3- номер 1 слоя по горизонтали\\
+j1- номер 1 слоя по вертикали\\
+j2- номер 2 слоя по горизонтали\\
+j3- номер 2 слоя по вертикали\\
+j4- номер 3 слоя по горизонтали\\
+\textbf{То есть координаты читаются слева направо и сверху вниз}\\
+\textbf{Примеры:}\\
+1. \(T\in  \mathbb{T}^1_1(V), dim(V)=2:\)\\
+\[
+T=
+\begin{bmatrix}
+\begin{array}{cc}
+T^1_1 & T^1_2 \\
+T^2_1 & T^2_2
+\end{array}
+\end{bmatrix}
+\]\\
+2. \(T\in  \mathbb{T}^0_2(V), dim(V)=2:\)\\
+\[
+T=
+\begin{bmatrix}
+\begin{array}{cc}
+T_{11} & T_{12} \\
+T_{21} & T_{22}
+\end{array}
+\end{bmatrix}
+\]\\
+3. \(T\in  \mathbb{T}^0_2(V), dim(V)=3:\)\\
+\[
+T=
+\begin{bmatrix}
+\begin{array}{ccc}
+T_{11} & T_{12} & T_{13} \\
+T_{21} & T_{22} & T_{23} \\
+T_{31} & T_{32} & T_{33} \\
+\end{array}
+\end{bmatrix}
+\]\\
+4. \(T\in  \mathbb{T}^2_2(V), dim(V)=2:\)\\
+\[
+T=
+\begin{bmatrix}
+\begin{array}{c|c}
+\begin{array}{cc}
+T^{11}_{11} & T^{12}_{11} \\
+T^{21}_{11} & T^{22}_{11}
+\end{array}
+&
+\begin{array}{cc}
+T^{11}_{12} & T^{12}_{12} \\
+T^{21}_{12} & T^{22}_{12}
+\end{array}\\
+\hline
+\begin{array}{cc}
+T^{11}_{21} & T^{12}_{21} \\
+T^{21}_{21} & T^{22}_{21}
+\end{array} & 
+\begin{array}{cc}
+T^{11}_{22} & T^{12}_{22} \\
+T^{21}_{22} & T^{22}_{22}
+\end{array}
+\end{array}
+\end{bmatrix}
+\]\\
+5. \(T\in  \mathbb{T}^3_2(V), dim(V)=2:\)\\
+T=\[
+\begin{bmatrix}
+\begin{array}{c||c}
+\begin{array}{c|c}
+\begin{array}{cc}
+T^{111}_{11}&T^{121}_{11}\\
+T^{211}_{11}&T^{221}_{11}\\
+\end{array}
+&
+\begin{array}{cc}
+T^{111}_{21}&T^{121}_{21}\\
+T^{211}_{21}&T^{221}_{21}\\
+\end{array}\\ 
+\hline
+\begin{array}{cc}
+T^{112}_{11}&T^{122}_{11}\\
+T^{212}_{11}&T^{222}_{11}\\
+\end{array}
+&
+\begin{array}{cc}
+T^{112}_{21}&T^{122}_{21}\\
+T^{212}_{21}&T^{222}_{21}\\
+\end{array}
+\end{array}
+&
+\begin{array}{c|c}
+\begin{array}{cc}
+T^{111}_{12}&T^{121}_{12}\\
+T^{211}_{12}&T^{221}_{12}\\
+\end{array}
+&
+\begin{array}{cc}
+T^{111}_{22}&T^{121}_{22}\\
+T^{211}_{22}&T^{221}_{22}\\
+\end{array}\\ 
+\hline
+\begin{array}{cc}
+T^{112}_{12}&T^{122}_{12}\\
+T^{212}_{12}&T^{222}_{12}\\
+\end{array}
+&
+\begin{array}{cc}
+T^{112}_{22}&T^{122}_{22}\\
+T^{212}_{22}&T^{222}_{22}\\
+\end{array}
+\end{array}
+\end{array}
+\end{bmatrix}\\
+\]
+\textbf{Тензорный закон преоброзования координат:}
+для начала:
+\textbf{Пусть: }
+\[ e_{j_k}= \sum^n_{a_k=1} C^{a_k}_{j_k}*\tilde{e}_{a_k}
+\]
+\[ e^{i_l}= \sum^n_{b_l=1} (C^{-1})^{b_l}_{i_l}*\tilde{e}^{b_l}
+\]
+здесь,\\
+\(e_{j_k}\)- j-тый базисный вектор k-того пространства в разложении T\\
+\(C^{a_k}_{j_k}\)- координата матрицы перехода
+\((\tilde{e}_{k} \xrightarrow{} e_{k})\) с координатами \(a_k,j_k\)\\
+то есть:\\ \(e_{k}=C\tilde{e}_{k}\)\\
+\(\tilde{e}_{a_k}\)- a-тый базисный вектор k-того пространства в разложении T в новом базисе\\
+\(e^{i_l}\)- i-тый базисный вектор l-того сопряжённого пространства в разложении T\\
+\((C^{-1})^{b_l}_{i_l}\) - координата матрицы перехода 
+\((\tilde{e}_{k} \xrightarrow{} e_{k})^{-1}\) с координатами \(b_l,i_l\)\\
+\textbf{ по свойствам сопряжённого пространства и матрицы перехода если:}
+\(e_{k}=C\tilde{e}_{k} \Rightarrow e^{k}=(C^{-1})\tilde{e}^{k}\)\\
+\(\tilde{e}^{b_l}\)- b-тый базисный вектор l-того сопряжённого пространства в разложении T в новом базисе\\
+так как:
+\[
+T =\sum_{i1, ... iq, j1, ... jp=1}^n (T^{i1, ... iq}_{j1, ... jp}*(e^{i1}\otimes ...\otimes e^{iq} \otimes e_{j1} \otimes...\otimes e_{jp}))=\]
+\[
+=\sum_{b1, ... bq, a1, ... ap=1}^n (\tilde{T}^{b1, ... bq}_{a1, ... ap}*(\tilde{e}^{b1}\otimes ...\otimes \tilde{e}^{bq} \otimes \tilde{e}_{a1} \otimes...\otimes \tilde{e}_{ap}))
+\]
+можем выразить одно из другого.
+\[
+T^{i1, ... iq}_{j1, ... jp}*(e^{i1}\otimes ...\otimes e^{iq} \otimes e_{j1} \otimes...\otimes e_{jp})=\]
+\[
+=T^{i1, ... iq}_{j1, ... jp}*
+([\sum^n_{b_1=1} (C^{-1})^{b_1}_{i_1}*\tilde{e}^{b_1}]\otimes ...\otimes 
+[\sum^n_{b_q=1} (C^{-1})^{b_q}_{i_q}*\tilde{e}^{b_q}] \otimes 
+[\sum^n_{a_1=1} C^{a_1}_{j_1}*\tilde{e}_{a_1}]\otimes...\otimes [\sum^n_{a_p=1}C^{a_p}_{j_p}*\tilde{e}_{a_p}])\]
+По линейности вынесем суммы:
+\[
+\sum^n_{b_1,...,bq, a1,...,ap=1}((C^{-1})^{b_1}_{i_1}*...*(C^{-1})^{b_q}_{i_q}*C^{a_1}_{j_1}*...*C^{a_p}_{j_p}*T^{i1, ... iq}_{j1, ... jp}*(\tilde{e}^{b1}\otimes ...\otimes \tilde{e}^{bq} \otimes \tilde{e}_{a1} \otimes...\otimes \tilde{e}_{ap})=
+\]
+\[
+=\tilde{T}^{b1, ... bq}_{a1, ... ap}*(\tilde{e}^{b1}\otimes ...\otimes \tilde{e}^{bq} \otimes \tilde{e}_{a1} \otimes...\otimes \tilde{e}_{ap})
+\]
+Итого:\\
+\[
+\sum^n_{b_1,...,bq, a1,...,ap=1}((C^{-1})^{b_1}_{i_1}*...*(C^{-1})^{b_q}_{i_q}*C^{a_1}_{j_1}*...*C^{a_p}_{j_p}*T^{i1, ... iq}_{j1, ... jp}=\tilde{T}^{b1, ... bq}_{a1, ... ap}
+\]
+\textbf{Альтернативное определение тензора как набора чисел:}\\
+Тензор \(T \in \mathbb{T}^q_p(V)\) - набор чисел для каждой компоненты
+(\(T^{i1, ...iq}_{j1, ... jp})\)) которого, в каждом базисе при переходе между любыми двумя базисами выполняется тензорный закон преобразования координат.\\
+*крч если закон при смене базиса выполняется то такой набор чисел - тензор\\
+\textbf{Тензорное произведение операторов:}\\
+\textbf{Пусть:}
+\[
+ A: V\xrightarrow{}W; \textbf{ } e_i \textbf{ - базис }V;\textbf{ } \epsilon_i \textbf{ - базис }W;
+\]
+\[
+ B: \tilde{V}\xrightarrow{}\tilde{W}; \textbf{ } e_i \textbf{ - базис }\tilde{V};\textbf{ } \epsilon_i \textbf{ - базис }\tilde{W};
+\]
+\[
+ A(e_k)= \sum^n_{i=1}a_{ik}*\epsilon_i; B(\tilde{e}_k)= \sum^n_{j=1}b_{jk}*\tilde{\epsilon}_j
+\]
+Тензорным произведением A и B называют такой \(A\otimes B\), что:
+\[ A\otimes B:V \otimes \tilde{V}\xrightarrow{} W \otimes \tilde{W}\]
+\[
+(A\otimes B)(e_k,\tilde{e}_l)=A(e_k)\otimes B(\tilde{e}_l)=[\sum^n_{i=1}a_{ik}*\epsilon_i] \otimes [\sum^n_{j=1}b_{jl}*\tilde{\epsilon}_j]=
+\sum^n_{i,j=1}a_{ik}b_{jl}(\epsilon_i \otimes \tilde{\epsilon}_j)
+\]
+из этого получаем:
+\[
+[A \otimes B]=
+\begin{bmatrix}
+a_{11}*B,a_{12}*B, ...,a_{1n}*B \\
+ ...\\
+a_{n1}*B,a_{n2}*B,...,a_{nn}*B
+\end{bmatrix}\\
+\]
+\textbf{Следствие:}\\
+\[
+tr([A \otimes B])=a_{11}*B+...+a_{nn}*B= B(a_{11}+...+a_{nn})=trA*trB
+\]
+\textbf{Оператор на тензорном квадрате:}\\
+Тензорным квадратом векторного пространства V нзывают \(V \otimes V\) \\
+\(dim(V \otimes V)=n^2\). он содержит всевозможные комбинации \((u \otimes w)\) где, \(u,w \in V\)\\
+Линейный оператор на тензорном квадрате-такой T, что:
+\[
+T \in End(V \otimes V);
+\]
+\[
+T=A \otimes B \textbf{ где, } A,B \in End(V);
+\]
+\[
+T(u \otimes w)=(A \otimes B)(u \otimes w)=A(u)\otimes B(w)
+\]
+Так как T - всё ещё линейный оператор для него верно:
+\[
+(T+S)(u \otimes w)=T(u \otimes w)+S(u \otimes w)
+\]
+\[(\lambda T)(u \otimes w)=\lambda(T(u \otimes w))\]
 
 \section{Свёртка тензоров. Интерпретация операций линейной алгебры в терминах тензорного умножения и свёртки.}
 
